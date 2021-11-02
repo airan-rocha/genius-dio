@@ -1,14 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=Irish+Grover&display=swap');
+
 body {
     margin: 0;
-    background-color: rgb(208, 255, 239);
+    background-color: #d0ffef;
+    background: linear-gradient(red, blue);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+.container {
+    width: 98%;
+    max-width: 920px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: rgb(255, 212, 212);
+    border-radius: 25px;
+}
+
+header h1 {
+    text-align: center;
+    font-family: 'Irish Grover', cursive;
+    color: yellow;
+    text-shadow: 4px 4px 5px black;
+}
+
+.score p{
+    font-family: 'Irish Grover', cursive;
+    font-size: 28px;
+    margin: 0 20px;
+    padding-top: 20px;
 }
 
 .main-game {
-    height: 100vh;
-    width: 100vw;
+    /* height: 100vh; */
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 0 10px 50px 10px;
+    box-sizing: border-box;
 }
 
 .genius {
@@ -18,9 +47,10 @@ body {
     border: 1px solid white;
     background-color: white;
     border-radius: 100%;
-    margin-top: 20px;
-    width: 700px;
-    height: 700px;
+    max-width: 100%;
+    max-height: calc(100vw - 10px);
+    width: 600px;
+    height: 600px;
 }
 
 .blue {
@@ -49,4 +79,46 @@ body {
 
 .selected {
     opacity: 0.5;
+}
+
+#alerta{
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    background-color: #000000ec;
+    text-align: center;
+}
+
+#alerta p{
+    font-family: 'Irish Grover', cursive;
+    font-size: 38px;
+    position: absolute;
+    top: 70px;
+    left: calc(50vw - 210px);
+}
+
+#alerta img {
+    margin-top: 100px;
+    max-width: 500px;
+    width: 90%;
+    border-radius: 50px;
+}
+
+#alerta img:hover {
+    cursor: pointer;
+}
+
+footer {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    text-align: center;
+    color: white;
+    padding: 5px 0;
+}
+
+@media screen and (max-width: 520px) {
+    #alerta p{
+        font-size: 28px;
+        left: calc(50vw - 100px);
+    }
 }

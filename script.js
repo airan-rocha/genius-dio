@@ -11,6 +11,9 @@ const blue = document.querySelector('.blue');
 const red = document.querySelector('.red');
 const green = document.querySelector('.green');
 const yellow = document.querySelector('.yellow');
+const myScore = document.getElementById('myScore');
+const alerta = document.getElementById('alerta');
+var btAlerta = document.querySelector('#alerta img');
 
 //Math.random() //gera valor aleatório
 //Math.floor(x) //arredonda o valor
@@ -47,11 +50,11 @@ let checkOrder = () => {
         if(clickedOrder[i] != order[i]) {
             gameOver();
             break;
+        }else if(clickedOrder.length == order.length) {
+            exibirAlerta(1);
+            score++;
+            btAlerta.onclick = () => nextLevel();
         }
-    }
-    if(clickedOrder.length == order.length) {
-        alert(`Pontuação: ${score}\nVocê acertou! Iniciando próximo nível`);
-        nextLevel();
     }
 }
 
@@ -81,26 +84,45 @@ let createColorElement = (color) => {
 
 //função para próximo nível do jogo
 let nextLevel = () => {
-    score++;
+    fecharAlerta();
+    myScore.textContent = score;
     shuftleOrder();
 }
 
 //função para game over
 let gameOver= () => {
-    alert(`Pontuação: ${score}\nVocê perdeu o jogo!\nClick em ok para iniciar um novo jogo`);
+    exibirAlerta(2);
     order = [];
     clickedOrder = [];
 
-    playGame();
+    btAlerta.onclick = () => {
+        exibirAlerta(0);
+        myScore.textContent = "- - -"
+        btAlerta.onclick = () => playGame();
+    };
 }
 
 //função para iniciar o jogo
 let playGame = () => {
-    alert(`Ben vindo ao Genius!\nIniciando o novo jogo!`)
     score = 0;
+    myScore.textContent = score;
 
     nextLevel();
 }
+
+/**
+ * 
+ * @param {*} number 0- inicio; 1- campeão; 2- perdeu
+ */
+let exibirAlerta = (number) => {
+    alerta.innerHTML = (number == 0)? "<img src='imagens/iniciar.png'>" :
+                       (number == 1)? "<img src='imagens/campeao.png'>" :
+                       (number == 2)? `<p>Your Score: ${score}</p> <img src='imagens/perdeu.png'>` : '';
+    alerta.style.visibility = 'visible';
+    btAlerta = document.querySelector('#alerta img');
+}
+
+let fecharAlerta = () => alerta.style.visibility= 'hidden';
 
 //evento de clique para as cores
 green.onclick = () => click(0);
@@ -108,4 +130,6 @@ red.onclick = () => click(1);
 yellow.onclick = () => click(2);
 blue.onclick = () => click(3);
 
-playGame();
+btAlerta.onclick = () => playGame();
+
+// playGame();
